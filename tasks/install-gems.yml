@@ -1,0 +1,13 @@
+---
+
+# Play book installs gitlab-ci gems
+
+#- name: ensure gem charlock_holmes is installed
+#  gem: name=charlock_holmes version=0.6.9.4 state=present
+
+- name: ensure GitLab-ci bundle is installed
+  command: sudo -u gitlab_ci -H bundle --without development test postgres --deployment
+
+# TODO: Add postresql support in a conditional
+# For Postgres
+# sudo -u gitlab_ci -H bundle --without development test mysql --deployment

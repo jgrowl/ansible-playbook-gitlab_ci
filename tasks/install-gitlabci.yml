@@ -1,0 +1,26 @@
+---
+
+# Play book installs gitlab-ci
+- name: clone gitlab ci source
+  git: repo=https://github.com/gitlabhq/gitlab-ci.git dest=/home/gitlab_ci #version=$gitlabVersion
+
+- name: gitlab should be owned by git user
+  file: path=/home/gitlab_ci owner=git group=git recurse=yes state=directory
+
+- name: Set the application.yml configuration file
+  template: src=templates/home/gitlab_ci/config/application.yml.j2 dest=/home/gitlab_ci/config/application.yml owner=gitlab_ci group=gitlab_ci
+
+- name: ensure copy of puma config exists
+  action: template src=templates/home/gitlab_ci/config/puma.rb.j2 dest=/home/gitlab_ci/config/puma.rb owner=gitlab_ci group=gitlab_ci
+
+- name: Create directory for sockets and make sure GitLab-ci can write to it
+  file: path=/home/gitlab_ci/tmp/sockets/ state=directory owner=gitlab_ci group=gitlab_ci
+
+- name: ensure GitLab-ci can write to sockets
+  command: chmod -R u+rwX /home/gitlab_ci/tmp/sockets
+
+- name: Create directory for pids and make sure GitLab-ci can write to it
+  file: path=/home/gitlab_ci/tmp/pids/ state=directory owner=gitlab_ci group=gitlab_ci
+
+- name: ensure GitLab-ci can write to pid
+  command: chmod -R u+rwX /home/gitlab_ci/tmp/pids

@@ -1,0 +1,8 @@
+- name: Ensure init script is installed
+  copy: src=files/etc/init.d/gitlab_ci dest=/etc/init.d/gitlab_ci owner=root group=root mode=0755
+
+- name: Make GitLab-ci start on boot 
+  command: update-rc.d gitlab_ci defaults 21
+
+- name: Start/Restart GitLab-ci
+  service: name=gitlab_ci state=started

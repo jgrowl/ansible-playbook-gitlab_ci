@@ -1,0 +1,19 @@
+# Some tasks like setting up the database should only ever get run once.
+- name: ensure there is a ansible directory
+  file: path=/home/gitlab_ci/.ansible state=directory owner=gitlab_ci group=gitlib_ci
+
+#TODO Add in postres in conditional
+#sudo -u gitlab_ci -H cp config/database.yml.postgresql config/database.yml
+#
+
+- name: Set the database.yml configuration file 
+  template: src=templates/home/gitlab_ci/config/database.yml.j2 dest=/home/gitlab_ci/config/database.yml owner=gitlab_ci group=gitlab_ci
+
+# Note if this fails for some reason you might need to manually remove the .ansible/setup-db
+- name: setup database
+  shell: sudo -u gitlab_ci -H bundle exec rake db:setup RAILS_ENV=production force=yess && sudo -u gitlab_ci -H /home/gitlab_ci/.ansible/setup-db creates=/home/gitlab_ci/.ansible/setup-db
+
+- name: Setup schedules
+  shell: sudo -u gitlab_ci -H bundle exec whenever -w RAILS_ENV=production
+
+

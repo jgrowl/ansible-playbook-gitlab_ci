@@ -1,0 +1,26 @@
+---
+# This Playbook deploys gitlab!
+
+- hosts: gitlab-ci
+  vars_files:
+    - vars/main.yml
+  user: root
+#  roles:
+#    - git-ppa/roles/ppa-dep
+#    - git-ppa
+  tasks:
+  - include: tasks/install-dependencies.yml
+
+  - include: tasks/install-mysql.yml
+    only_if: "'$database' == 'mysql'"
+
+  - include: tasks/install-gitlabci.yml
+  - include: tasks/install-gems.yml
+  - include: tasks/initialize-database.yml
+  - include: tasks/install-init-script.yml
+
+  - include: tasks/install-nginx.yml
+    only_if: "'$webserver' == 'nginx'"
+#
+#  handlers:
+#   - include: handlers/main.yml

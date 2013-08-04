@@ -1,0 +1,15 @@
+- name: ensure package nginx is present
+  apt: pkg=nginx state=installed
+
+- name: set the gitlab-ci nginx config
+  template: src=templates/etc/nginx/sites-available/gitlab_ci.j2 dest=/etc/nginx/sites-available/gitlab_ci mode=0755
+
+- name: ensure default Nginx site is not enabled
+  file: state=absent path=/etc/nginx/sites-enabled/default
+
+- name: ensure GitLab-ci Nginx site is enabled
+  file: state=link src=/etc/nginx/sites-available/gitlab_ci path=/etc/nginx/sites-enabled/gitlab_ci
+
+- name: restart nginx 
+  service: name=nginx state=started
+

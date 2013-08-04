@@ -1,0 +1,58 @@
+---
+# Gitlab playbook
+
+- name: upgrade
+  action: apt update_cache=yes upgrade=yes
+
+- name: install gitlab dependencies 
+  action: apt pkg=$item state=installed
+  with_items:
+    - wget 
+    - curl 
+    - gcc checkinstall 
+    - libxml2-dev 
+    #- libxslt-dev 
+    - libxslt1-dev # The installation document says libxslt-dev, but I guess this is okay
+    - libcurl4-openssl-dev  
+    - libreadline6-dev 
+    - libc6-dev  
+    - libssl-dev 
+    - libmysql++-dev 
+    - make 
+    - build-essential 
+    - zlib1g-dev 
+    - openssh-server 
+    - git-core 
+    - libyaml-dev 
+    - postfix 
+    - libpq-dev 
+    - libicu-dev
+    - redis-server 
+
+# Install correct version of ruby from source
+- name: ensure directory /tmp/ruby is present
+  file: state=directory path=/tmp/ruby
+
+- name: ensure ruby is downloaded
+  get_url: url=$rubyUrl dest=/tmp/ruby
+
+- name: ensure ruby is extracted
+  command: tar -xf ruby-1.9.3-p392.tar.gz chdir=/tmp/ruby creates=$tmpRubyPath
+
+- name: ensure ruby is configured
+  command: ./configure chdir=$tmpRubyPath creates=$tmpRubyPath/Makefile
+
+- name: ensure ruby is compiled
+  command: make chdir=$tmpRubyPath creates=$tmpRubyPath/ruby
+
+- name: ensure ruby is installed
+  command: make install chdir=$tmpRubyPath creates=/usr/local/bin/ruby
+
+# Install bundler
+- name: ensure bundler is installed
+  gem: name=bundler state=present 
+
+# Add gitlab_ci user
+- name: ensure user gitlab_ci is present
+# Possible problem is that --disabled-password is not set explicitly – I couldn’t find anything like that.
+  user: state=present name=gitlab_ci system=yes shell=/bin/sh comment="GitLab CI" 
