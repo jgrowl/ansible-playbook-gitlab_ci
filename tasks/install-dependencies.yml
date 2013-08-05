@@ -9,7 +9,8 @@
   with_items:
     - wget 
     - curl 
-    - gcc checkinstall 
+    - gcc 
+    - checkinstall 
     - libxml2-dev 
     #- libxslt-dev 
     - libxslt1-dev # The installation document says libxslt-dev, but I guess this is okay
