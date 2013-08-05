@@ -7,7 +7,7 @@
 #
 
 - name: Set the database.yml configuration file 
-  template: src=templates/home/gitlab_ci/config/database.yml.j2 dest=/home/gitlab_ci/config/database.yml owner=$gitlab_ci_user group=$gitlab_ci_group
+  template: src=templates/home/gitlab_ci/gitlab-ci/config/database.yml.j2 dest=/home/gitlab_ci/gitlab-ci/config/database.yml owner=$gitlab_ci_user group=$gitlab_ci_group
 
 # Note if this fails for some reason you might need to manually remove the .ansible/setup-db
 - name: setup database
