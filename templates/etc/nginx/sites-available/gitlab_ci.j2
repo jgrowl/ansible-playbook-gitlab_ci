@@ -7,8 +7,9 @@ upstream gitlab_ci {
 }
 
 server {
-  listen {{gitlabCiPort}} default_server;         # e.g., listen 192.168.1.1:80;
-  server_name {{gitlabCiWebPort}};     # e.g., server_name source.example.com;
+  listen {{gitlabCiWebPort}} default_server;         # e.g., listen 192.168.1.1:80;
+  server_name {{gitlabCiWebHost}};     # e.g., server_name source.example.com;
+
   root /home/gitlab_ci/gitlab-ci/public;
 
   access_log  /var/log/nginx/gitlab_ci_access.log;
