@@ -29,6 +29,11 @@
     - libpq-dev 
     - libicu-dev
     - redis-server 
+    - python # needed for mysql install
+
+# Make sure right version of python will be used
+- name: ensure /usr/local/bin/python2 links to /usr/bin/python
+  file: state=link src=/usr/bin/python path=/usr/local/bin/python2
 
 # Install bundler
 - name: ensure bundler is installed
