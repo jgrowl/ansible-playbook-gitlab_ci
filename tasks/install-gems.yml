@@ -6,7 +6,7 @@
 #  gem: name=charlock_holmes version=0.6.9.4 state=present
 
 - name: ensure GitLab-ci bundle is installed
-  command: sudo -u gitlab_ci -H bundle --without development test postgres --deployment
+  command: sudo -u gitlab_ci -H bundle --without development test postgres --deployment chdir=/home/gitlab_ci/gitlab-ci/
 
 # TODO: Add postresql support in a conditional
 # For Postgres
