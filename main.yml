@@ -6,9 +6,10 @@
     - vars/main.yml
   user: root
   roles:
+    - install-dependencies
     - ruby-from-src
   tasks:
-  - include: tasks/install-dependencies.yml
+  #- include: tasks/install-dependencies.yml
 
   - include: tasks/install-mysql.yml
     only_if: "'$database' == 'mysql'"
