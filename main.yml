@@ -6,7 +6,7 @@
     - vars/main.yml
   user: root
   roles:
-    - install-dependencies
+    - install-ruby-dependencies
     - ruby-from-src
   tasks:
   - include: tasks/install-dependencies.yml
