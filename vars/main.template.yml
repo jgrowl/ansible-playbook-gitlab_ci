@@ -8,7 +8,7 @@ gitlab_ci_user: gitlab_ci
 gitlab_ci_group: gitlab_ci
 #gitlabIp: ${ansible_default_ipv4.address}:80   # e.g., listen 192.168.1.1:80
 gitlabCiHost: ci.example.com # e.g., server_name source.example.com;
-gitlabCiPort: 80
+gitlabCiWebPort: 80
 
 gitlab_ci_db_username: "gitlabCi"
 gitlab_ci_db_password: "securePassword" 
