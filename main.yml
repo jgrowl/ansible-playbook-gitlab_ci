@@ -1,5 +1,5 @@
 ---
-# This Playbook deploys gitlab!
+# This Playbook deploys gitlab ci!
 
 - hosts: gitlab_ci
   vars_files:
@@ -8,6 +8,8 @@
   roles:
     - install-ruby-dependencies
     - ruby-from-src
+    - ssl-certs
+      only_if: "'$https' == 'true'"
   tasks:
   - include: tasks/install-dependencies.yml
 

@@ -1,3 +1,6 @@
 [submodule "roles/ruby-from-src"]
 	path = roles/ruby-from-src
 	url = https://github.com/jgrowl/ansible-playbook-ruby-from-src.git
+[submodule "roles/ssl-certs"]
+	path = roles/ssl-certs
+	url = https://github.com/jgrowl/ansible-playbook-ssl-certs.git
