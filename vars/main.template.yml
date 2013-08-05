@@ -5,11 +5,8 @@ tmpRubyPath: /tmp/ruby/ruby-1.9.3-p392
 gitlabCiHost: gitlab.example.com # e.g., server_name source.example.com;
 gitlabCiPort: 80
 
-gitlabCiDatabaseUsername: "root"
-gitlabCiDatabasePassword: "secure password" 
-
-
-
+gitlab_ci_db_username: "root"
+gitlab_ci_db_password: "secure password" 
 
 
 

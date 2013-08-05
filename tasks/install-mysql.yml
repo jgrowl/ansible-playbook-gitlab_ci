@@ -9,12 +9,12 @@
     - libmysqlclient-dev
     - python-mysqldb
 
-- name: ensure database user gitlab-ci is present
-  mysql_user: state=present name=$gitlabCiDatabaseUsername host=localhost password=$gitlabCiDatabasePassword
+- name: ensure database user gitlab_ci is present
+  mysql_user: state=present name=$gitlab_ci_db_username host=localhost password=$gitlab_ci_db_password
 
 - name: ensure database gitlab_ci_production is present
   mysql_db: state=present name=gitlab_ci_production collation=utf8_unicode_ci encoding=utf8
 
 #TODO: Whoops, fix the databaseusername in this command
 - name: ensure database user gitlab has necessary privleges
-  mysql_user: state=present name=gitlab_ci priv=gitlab_ci_production.*:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,INDEX,ALTER
+  mysql_user: state=present name=$gitlab_ci_db_username priv=gitlab_ci_production.*:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,INDEX,ALTER
