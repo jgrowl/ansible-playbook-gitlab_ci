@@ -2,7 +2,7 @@
 
 # Play book installs gitlab-ci
 - name: clone gitlab ci source
-  git: repo=https://github.com/gitlabhq/gitlab-ci.git dest=/home/gitlab_ci #version=$gitlabVersion
+  git: repo=https://github.com/gitlabhq/gitlab-ci.git dest=/home/gitlab_ci/gitlab-ci #version=$gitlabVersion
 
 - name: gitlab should be owned by git user
   file: path=/home/gitlab_ci owner=git group=git recurse=yes state=directory
