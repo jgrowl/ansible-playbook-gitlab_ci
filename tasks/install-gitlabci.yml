@@ -23,4 +23,4 @@
   file: path=/home/gitlab_ci/gitlab-ci/tmp/pids/ state=directory owner=$gitlab_ci_user group=$gitlab_ci_group
 
 - name: ensure GitLab-ci can write to pid
-  command: chmod -R u+rwX /home/gitlab_ci/tmp/pids
+  command: chmod -R u+rwX /home/gitlab_ci/gitlab-ci/tmp/pids
