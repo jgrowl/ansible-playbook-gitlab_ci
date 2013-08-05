@@ -4,7 +4,7 @@
 - name: upgrade
   action: apt update_cache=yes upgrade=yes
 
-- name: install gitlab dependencies 
+- name: install gitlab ci dependencies 
   action: apt pkg=$item state=installed
   with_items:
     - wget 
