@@ -1,1 +1,1 @@
-../.ansible-playbook-gitlab/vars/main.yml
+../.ansible-playbook-gitlab_ci/vars/main.yml
