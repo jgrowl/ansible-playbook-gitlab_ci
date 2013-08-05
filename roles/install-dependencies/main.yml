@@ -1,0 +1,7 @@
+---
+# This Playbook deploys gitlab_ci dependencies 
+
+- hosts: gitlab_ci-dependencies
+  user: root
+  tasks:
+  - include: tasks/install-dependencies.yml

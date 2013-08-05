@@ -1,0 +1,45 @@
+---
+# Gitlab playbook
+
+- name: upgrade
+  action: apt update_cache=yes upgrade=yes
+
+- name: install gitlab ci dependencies 
+  action: apt pkg=$item state=installed
+  with_items:
+    - wget 
+    - curl 
+    - gcc 
+    - checkinstall 
+    - libxml2-dev 
+    #- libxslt-dev 
+    - libxslt1-dev # The installation document says libxslt-dev, but I guess this is okay
+    - libcurl4-openssl-dev  
+    - libreadline6-dev 
+    - libc6-dev  
+    - libssl-dev 
+    - libmysql++-dev 
+    - make 
+    - build-essential 
+    - zlib1g-dev 
+    - openssh-server 
+    - git-core 
+    - libyaml-dev 
+    - postfix 
+    - libpq-dev 
+    - libicu-dev
+    - redis-server 
+    - python # needed for mysql install
+
+# Make sure right version of python will be used
+- name: ensure /usr/local/bin/python2 links to /usr/bin/python
+  file: state=link src=/usr/bin/python path=/usr/local/bin/python2
+
+# Install bundler
+- name: ensure bundler is installed
+  gem: name=bundler state=present 
+
+# Add gitlab_ci user
+- name: ensure user gitlab_ci is present
+# Possible problem is that --disabled-password is not set explicitly – I couldn’t find anything like that.
+  user: state=present name=gitlab_ci system=yes shell=/bin/sh comment="GitLab CI" 
