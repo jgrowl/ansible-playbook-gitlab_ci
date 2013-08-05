@@ -22,3 +22,7 @@ webserver: nginx
 
 # Currently only mysql is supported
 database: mysql 
+
+default_gitlabs:
+  - https://dev-gitlab.example.com
+  - https://prod-gitlab.example.com
