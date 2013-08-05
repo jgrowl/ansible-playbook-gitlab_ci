@@ -1,0 +1,3 @@
+[submodule "roles/ruby-from-src"]
+	path = roles/ruby-from-src
+	url = https://github.com/jgrowl/ansible-playbook-ruby-from-src.git

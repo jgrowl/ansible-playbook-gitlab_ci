@@ -5,9 +5,8 @@
   vars_files:
     - vars/main.yml
   user: root
-#  roles:
-#    - git-ppa/roles/ppa-dep
-#    - git-ppa
+  roles:
+    - ruby-from-src
   tasks:
   - include: tasks/install-dependencies.yml
 
