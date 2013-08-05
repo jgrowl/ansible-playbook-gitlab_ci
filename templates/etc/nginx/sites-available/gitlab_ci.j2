@@ -6,6 +6,15 @@ upstream gitlab_ci {
   server unix:/home/gitlab_ci/gitlab-ci/tmp/sockets/gitlab-ci.socket;
 }
 
+{% if https == 'true' %}
+  ssl on;
+  ssl_certificate {{sslCertificate}};
+  ssl_certificate_key {{sslCertificateKey}};
+  ssl_protocols  SSLv3 TLSv1;
+  ssl_ciphers AES:HIGH:!ADH:!MD5;
+  ssl_prefer_server_ciphers   on;  
+{% endif %}
+
 server {
   listen {{gitlabCiWebPort}} default_server;         # e.g., listen 192.168.1.1:80;
   server_name {{gitlabCiWebHost}};     # e.g., server_name source.example.com;
