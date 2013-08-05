@@ -8,8 +8,7 @@
   roles:
     - install-ruby-dependencies
     - ruby-from-src
-    - ssl-certs
-      only_if: "'$https' == 'true'"
+    - {role: ssl-certs, when: "'$https' == 'true'"}
   tasks:
   - include: tasks/install-dependencies.yml
 
