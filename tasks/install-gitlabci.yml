@@ -8,10 +8,10 @@
   file: path=/home/gitlab_ci owner=$gitlab_ci_user group=$gitlab_ci_group recurse=yes state=directory
 
 - name: Set the application.yml configuration file
-  template: src=templates/home/gitlab_ci/config/application.yml.j2 dest=/home/gitlab_ci/config/application.yml owner=$gitlab_ci_user group=$gitlab_ci_group
+  template: src=home/gitlab_ci/config/application.yml.j2 dest=/home/gitlab_ci/config/application.yml owner=$gitlab_ci_user group=$gitlab_ci_group
 
 - name: ensure copy of puma config exists
-  action: template src=templates/home/gitlab_ci/config/puma.rb.j2 dest=/home/gitlab_ci/config/puma.rb owner=$gitlab_ci_user group=$gitlab_ci_group
+  template: src=home/gitlab_ci/config/puma.rb.j2 dest=/home/gitlab_ci/config/puma.rb owner=$gitlab_ci_user group=$gitlab_ci_group
 
 - name: Create directory for sockets and make sure GitLab-ci can write to it
   file: path=/home/gitlab_ci/tmp/sockets/ state=directory owner=$gitlab_ci_user group=$gitlab_ci_group
