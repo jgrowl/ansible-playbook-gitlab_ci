@@ -11,7 +11,7 @@
 
 # Note if this fails for some reason you might need to manually remove the .ansible/setup-db
 - name: setup database
-  shell: sudo -u gitlab_ci -H bundle exec rake db:setup RAILS_ENV=production force=yes && sudo -u gitlab_ci -H /home/gitlab_ci/.ansible/setup-db creates=/home/gitlab_ci/.ansible/setup-db
+  shell: sudo -u gitlab_ci -H bundle exec rake db:setup RAILS_ENV=production force=yes && sudo -u gitlab_ci -H touch /home/gitlab_ci/.ansible/setup-db chdir=/home/gitlab_ci/gitlab-ci creates=/home/gitlab_ci/.ansible/setup-db
 
 - name: Setup schedules
   shell: sudo -u gitlab_ci -H bundle exec whenever -w RAILS_ENV=production
