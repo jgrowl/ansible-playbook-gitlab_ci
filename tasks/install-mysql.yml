@@ -9,7 +9,7 @@
     - libmysqlclient-dev
     - python-mysqldb
 
-- name: ensure database user gitlab_ci is present
+- name: ensure database user for gitlab_ci is present
   mysql_user: state=present name=$gitlab_ci_db_username host=localhost password=$gitlab_ci_db_password
 
 - name: ensure database gitlab_ci_production is present
