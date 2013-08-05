@@ -6,9 +6,9 @@
     - vars/main.yml
   user: root
   roles:
+    - {role: ssl-certs, when: https == 'true'}
     - install-ruby-dependencies
     - ruby-from-src
-    - {role: ssl-certs, when: "'$https' == 'true'"}
   tasks:
   - include: tasks/install-dependencies.yml
 
@@ -25,3 +25,4 @@
 #
 #  handlers:
 #   - include: handlers/main.yml
+
